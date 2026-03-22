@@ -2,6 +2,19 @@ import numpy as np
 from numpy.linalg import norm, solve, multi_dot, eigvals
 import matplotlib.pyplot as plt
 
+""" 
+ @description: heavy ball method
+ @parameters :
+    @f    : objective function  
+    @Df: gradient of objective function
+    @D2f: hessian of objective function
+    @x0         : starting point 
+    @tol
+        :
+ tolerace for stopping criteria 
+    @maxIter    : maximum iteration for stopping criteria
+ """
+
 def f(x):
     return 100 * (x[1] - x[0]**2)**2 + (1 - x[0])**2
 
@@ -26,21 +39,22 @@ def compute_alpha_beta(x, D2f):
         return alpha, beta
     return 1e-3, 0.9
 
-# Settings for heavy ball method
-"""
- @description: heavy ball method
- @parameters :
-    @f    : objective function  
-    @Df: gradient of objective function
-    @D2f: hessian of objective function
-    @x0         : starting point 
-    @tol
-        :
- tolerace for stopping criteria 
-    @maxIter    : maximum iteration for stopping criteria
- """
+def gradient_descent(f, Df, x0, alpha, tol, maxIter):
+    x = x0
+    path = [x]
+    grad_norms = [norm(Df(x))]
+    
+    for k in range(int(maxIter)):
+        grad = Df(x)
+        if norm(grad) < tol:
+            break
+        x = x - alpha * grad
+        path.append(x)
+        grad_norms.append(norm(Df(x)))
+    
+    return x, k, np.array(path), grad_norms
 
-def heavyBall_default(f, Df, D2f, x0, alpha0, tol, maxIter):
+def heavy_ball(f, Df, D2f, x0, alpha0, tol, maxIter):
     path      = [x0]
     grad_norms = [norm(Df(x0))]                           
     k         = 0
@@ -73,7 +87,7 @@ def heavyBall_default(f, Df, D2f, x0, alpha0, tol, maxIter):
     return xk, k, path, grad_norms
 
 # FletcherReeves' Heavy Ball method
-def heavyBall_FletcherReeves(f, Df, x0, alpha0, tol, maxIter):
+def heavy_ball_fletcher_reeves(f, Df, x0, alpha0, tol, maxIter):
     path = [x0]
     grad_norms = [norm(Df(x0))]
     k = 0
@@ -108,11 +122,13 @@ if __name__ == "__main__":
     maxIter = 1e6 
     alpha0 = 1e-3
 
-    x_default, iter_default, path_default, grad_norms_default = heavyBall_default(f, Df, D2f, x0, alpha0, tol, maxIter) 
+    x_gd, iter_gd, path_gd, grad_norms_gd = gradient_descent(f, Df, x0, 1e-3, tol, maxIter)
 
-    x_FletcherReeves, iter_FletcherReeves, path_FletcherReeves, grad_norms_FletcherReeves = heavyBall_FletcherReeves(f, Df, x0, alpha0, tol, maxIter)
+    x_heavy_ball, iter_default, path_default, grad_norms_heavy_ball = heavy_ball(f, Df, D2f, x0, alpha0, tol, maxIter) 
 
-    def plot_heavyBall(method, grad_norms):
+    x_fletcher_reeves, iter_fletcher_reeves, path_fletcher_reeves, grad_norms_fletcher_reeves = heavy_ball_fletcher_reeves(f, Df, x0, alpha0, tol, maxIter)
+
+    def plotting(method, grad_norms):
         plt.figure(figsize=(8, 6))
         plt.plot(range(len(grad_norms)), grad_norms)
         plt.yscale("log")
@@ -122,5 +138,6 @@ if __name__ == "__main__":
         plt.grid(True)
         plt.savefig(f"{method}.png")
         plt.close()
-    plot_heavyBall("Heavy Ball", grad_norms_default)
-    plot_heavyBall("Fletcher-Reeves Adaptive Heavy Ball", grad_norms_FletcherReeves)
+    plotting("gradient_descent", grad_norms_gd)
+    plotting("heavy_ball", grad_norms_heavy_ball)
+    plotting("fletcher_reeves", grad_norms_fletcher_reeves)
