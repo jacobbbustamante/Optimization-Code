@@ -48,6 +48,11 @@ The script produces:
 
 ---
 
+## Example Output
+
+![Heavy Ball](Heavy Ball.png)
+![Fletcher-Reeves](Fletcher-Reeves Adaptive Heavy Ball.png)
+
 ## Requirements
 
 Install required Python packages:
