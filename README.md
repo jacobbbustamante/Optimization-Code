@@ -59,9 +59,9 @@ Their convergence behaviors are compared using gradient norm decay.
 
 ## Example Output
 
-![Heavy Ball](Heavy%20Ball.png)
+![Heavy Ball](heavy_ball.png)
 
-![Fletcher-Reeves](Fletcher-Reeves%20Adaptive%20Heavy%20Ball.png)
+![Fletcher-Reeves](fletcher_reeves.png)
 
 ## Requirements
 
