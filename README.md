@@ -1,7 +1,7 @@
-# Optimization Code: Heavy Ball Method
+# Optimization Code: Heavy Ball Methods
 
 ## Overview
-This project implements the Heavy Ball method for optimization and analyzes its convergence behavior on a test function. This experiment focuses on ill-conditioned optimization behavior using the Rosenbrock function.
+This project implements the Heavy Ball methods for optimization and analyzes its convergence behavior on a test function. This experiment focuses on ill-conditioned optimization behavior, using the Rosenbrock function.
 
 The objective function used is:
 
@@ -12,7 +12,7 @@ This is the Rosenbrock function, a standard test problem in optimization.
 ---
 
 ## Purpose
-The goal of this project is to study the convergence behavior of momentum-based optimization methods and compare them against baseline methods.
+The goal of this project is to study the convergence behavior of these momentum-based optimization methods and compare them against baseline methods.
 
 ---
 
