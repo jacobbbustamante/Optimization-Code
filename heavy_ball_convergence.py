@@ -120,6 +120,7 @@ if __name__ == "__main__":
         plt.ylabel("Norm of Gradient (log scale)")
         plt.title(f"Convergence of {method} Method")
         plt.grid(True)
-        plt.show()
+        plt.savefig(f"{method}.png")
+        plt.close()
     plot_heavyBall("Heavy Ball", grad_norms_default)
     plot_heavyBall("Fletcher-Reeves Adaptive Heavy Ball", grad_norms_FletcherReeves)
