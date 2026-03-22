@@ -42,7 +42,7 @@ def compute_alpha_beta(x, D2f):
 
 def heavyBall_default(f, Df, D2f, x0, alpha0, tol, maxIter):
     path      = [x0]
-    grad_norms = [norm(f(x0))]                           
+    grad_norms = [norm(Df(x0))]                           
     k         = 0
     xk        = x0    
     pk        = -Df(xk)
@@ -102,24 +102,24 @@ def heavyBall_FletcherReeves(f, Df, x0, alpha0, tol, maxIter):
         print("Unable to locate minimizer within maximum iterations, last position is at {x}, gradient's norm is {nrm}".format(x=xk,nrm=norm(pk)))
     return xk_1, k, path, grad_norms
 
+if __name__ == "__main__":
+    x0 = np.array([1.2, 1.2]) # Harder to converge 
+    tol = 1e-11 
+    maxIter = 1e6 
+    alpha0 = 1e-3
 
-x0 = np.array([1.2, 1.2]) # Harder to converge 
-tol = 1e-11 
-maxIter = 1e6 
-alpha0 = 1e-3
+    x_default, iter_default, path_default, grad_norms_default = heavyBall_default(f, Df, D2f, x0, alpha0, tol, maxIter) 
 
-x_default, iter_default, path_default, grad_norms_default = heavyBall_default(f, Df, D2f, x0, alpha0, tol, maxIter) 
+    x_FletcherReeves, iter_FletcherReeves, path_FletcherReeves, grad_norms_FletcherReeves = heavyBall_FletcherReeves(f, Df, x0, alpha0, tol, maxIter)
 
-x_FletcherReeves, iter_FletcherReeves, path_FletcherReeves, grad_norms_FletcherReeves = heavyBall_FletcherReeves(f, Df, x0, alpha0, tol, maxIter)
-
-def plot_heavyBall(method, grad_norms):
-    plt.figure(figsize=(8, 6))
-    plt.plot(range(len(grad_norms)), grad_norms)
-    plt.yscale("log")
-    plt.xlabel("Iteration Number")
-    plt.ylabel("Norm of Gradient (log scale)")
-    plt.title(f"Convergence of {method} Method")
-    plt.grid(True)
-    plt.show()
-plot_heavyBall("Heavy Ball", grad_norms_default)
-plot_heavyBall("Fletcher-Reeves Adaptive Heavy Ball", grad_norms_FletcherReeves)
+    def plot_heavyBall(method, grad_norms):
+        plt.figure(figsize=(8, 6))
+        plt.plot(range(len(grad_norms)), grad_norms)
+        plt.yscale("log")
+        plt.xlabel("Iteration Number")
+        plt.ylabel("Norm of Gradient (log scale)")
+        plt.title(f"Convergence of {method} Method")
+        plt.grid(True)
+        plt.show()
+    plot_heavyBall("Heavy Ball", grad_norms_default)
+    plot_heavyBall("Fletcher-Reeves Adaptive Heavy Ball", grad_norms_FletcherReeves)
