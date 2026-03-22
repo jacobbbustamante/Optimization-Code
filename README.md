@@ -47,7 +47,7 @@ Three variants are implemented:
 - Standard Heavy Ball method
 - Fletcher-Reeves Heavy Ball method 
 
-The Heavy Ball methods converge magnitudes faster than the standard Gradient Descent method, with the Fletcher-Reeves converging fastest of the three methods.
+The Heavy Ball methods converge magnitudes faster than the standard Gradient Descent method.
 
 ## Output
 
