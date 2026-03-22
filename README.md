@@ -28,6 +28,14 @@ The script produces:
 - Trajectory of optimization
 - Plots of function value vs iterations
 
+## Comparison
+
+Two variants are implemented:
+- Standard Heavy Ball method with adaptive parameters
+- Fletcher-Reeves inspired momentum update
+
+Their convergence behaviors are compared using gradient norm decay.
+
 ## Methods Implemented
 
 - Gradient (first derivative)
