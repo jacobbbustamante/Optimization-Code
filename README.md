@@ -1,11 +1,11 @@
 # Optimization Code: Heavy Ball Method
 
 ## Overview
-This project implements the Heavy Ball method for optimization and analyzes its convergence behavior on a test function.
+This project implements the Heavy Ball method for optimization and analyzes its convergence behavior on a test function. This experiment focuses on ill-conditioned optimization behavior using the Rosenbrock function.
 
 The objective function used is:
 
-f(x) = 100(x2 - x1^2)^2 + (1 - x1)^2
+f(x) = 100(x_2 - x_1^2)^2 + (1 - x_1)^2
 
 This is the Rosenbrock function, a standard test problem in optimization.
 
@@ -46,7 +46,8 @@ Two variants are implemented:
 - Standard Heavy Ball method with adaptive parameters
 - Fletcher-Reeves inspired momentum update
 
-Their convergence behaviors are compared using gradient norm decay.
+The Heavy Ball method demonstrates faster convergence compared to gradient descent, as seen by the steeper decay in gradient norm.
+
 
 ## Output
 
@@ -66,6 +67,8 @@ The script produces:
 ---
 
 ## Example Output
+
+![Gradient Descent](gradient_descent.png)
 
 ![Heavy Ball](heavy_ball.png)
 
