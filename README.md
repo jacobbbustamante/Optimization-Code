@@ -56,7 +56,6 @@ Their convergence behaviors are compared using gradient norm decay.
 
 ---
 
-## Example Output
 
 ## Example Output
 
