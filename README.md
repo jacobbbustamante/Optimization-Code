@@ -11,6 +11,18 @@ This is the Rosenbrock function, a standard test problem in optimization.
 
 ---
 
+## Purpose
+The goal of this project is to study the convergence behavior of momentum-based optimization methods and compare them against baseline methods.
+
+---
+
+## Methods Implemented
+- Gradient (first derivative)
+- Hessian (second derivative)
+- Heavy Ball optimization method
+- Fletcher-Reeves variant
+- Convergence visualization
+
 ## Algorithm Details
 
 The Heavy Ball method updates iterates using:
@@ -21,12 +33,12 @@ where:
 - α = step size (learning rate)
 - β = momentum parameter
 
-## Output
+## Parameters
 
-The script produces:
-- Iterative convergence behavior
-- Trajectory of optimization
-- Plots of function value vs iterations
+- Initial point: x0 = [1.2, 1.2]
+- Tolerance: 1e-11
+- Max iterations: 1e6
+- Initial step size: 1e-3
 
 ## Comparison
 
@@ -36,26 +48,22 @@ Two variants are implemented:
 
 Their convergence behaviors are compared using gradient norm decay.
 
-## Methods Implemented
+## Output
 
-- Gradient (first derivative)
-- Hessian (second derivative)
-- Heavy Ball optimization method
-- Convergence visualization
-
----
+The script produces:
+- Iterative convergence behavior
+- Trajectory of optimization
+- Plots of function value vs iterations
 
 ## File Structure
-
 - `heavy_ball_convergence.py`  
-  Main script containing:
+  Contains:
   - function definition
   - gradient and Hessian
-  - optimization algorithm
-  - plotting of convergence behavior
+  - optimization algorithms
+  - convergence plotting
 
 ---
-
 
 ## Example Output
 
@@ -63,9 +71,11 @@ Their convergence behaviors are compared using gradient norm decay.
 
 ![Fletcher-Reeves](fletcher_reeves.png)
 
+---
+
 ## Requirements
 
-Install required Python packages:
+Install dependencies:
 
 ```bash
 pip install numpy matplotlib
